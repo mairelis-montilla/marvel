@@ -1,14 +1,16 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'App',
+  name: 'MarvelView',
 }
 </script>
 
 <style>
+
 </style>
