@@ -1,24 +1,18 @@
 # marvel
 
-## Project setup
+## Setup del Proyecto
+Clonar repositorio
+```
+git clone https://github.com/mairelis-montilla/marvel.git
+```
+
+luego realizar el yarn install
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### Para compilar y levantar el servidor en local
 ```
 yarn serve
 ```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+La aplicacion correra en el puerto 8080
