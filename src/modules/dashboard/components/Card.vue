@@ -1,23 +1,32 @@
 <template>
   <b-card
-    title="Card Title"
-    img-src="https://picsum.photos/600/300/?image=25"
-    img-alt="Image"
+    :title="character.name"
+    :img-src="`${character.thumbnail.path}.${character.thumbnail.extension}`"
+    img-alt="character thumbnail"
     img-top
     tag="article"
-    style="max-width: 20rem;"
-    class="mb-2">
+    img-height="220px"
+    img-width="250px"
+    style="max-width: 18rem;"
+    class="m-3">
+    <b-card-sub-title class="mb-2">Last modified: <span>{{character.modified}}</span></b-card-sub-title>
     <b-card-text>
-      Some quick example text to build on the card title and make up the bulk of the card's content.
+      {{character.description}}
     </b-card-text>
 
-    <b-button href="#" variant="primary">Go somewhere</b-button>
+    <b-button href="#" variant="primary">Edit</b-button>
   </b-card>
 </template>
 
 <script>
 export default {
   name: 'card-item',
+  props:{
+    character: {
+      type: Object,
+      required: true
+    }
+  }
 
 }
 </script>
