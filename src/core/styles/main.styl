@@ -1,0 +1,25 @@
+@import "~@/core/styles/variables.styl"
+html
+body
+#app
+  margin 0px
+  padding 0px
+  box-sizing border-box
+  background-color black
+  font-family 'Open Sans', serif
+  ::after, ::before 
+    box-sizing: border-box
+
+.common-btn
+  background-color color-red-1
+  border color-red-1
+  color white
+  min-width: 100px
+  font-weight: bold
+  &:hover
+    background-color color-red-2
+  &--ligth
+    background-color color-blue-1
+    border color-blue-1
+    &:hover
+      background-color #7c9aa0
