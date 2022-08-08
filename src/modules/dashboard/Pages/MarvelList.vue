@@ -1,11 +1,16 @@
 <template>
   <b-overlay :show="show" rounded="lg">
-    <div class="d-flex flex-column justify-center aling-items-center m-4">
+    <page-header></page-header>
+    <div class="d-flex flex-column justify-content-center aling-items-center m-4">
       <search-bar @onSearch="search"></search-bar>
-      <b-card-group columns>
-        <card-item v-for="(character, index) in characters" :character="character" :key="`card-character-${character.id}-${index}`"/>
-      </b-card-group>
+      <div class="col-11 d-flex justify-content-end mb-3">
+          <b-button class="common-btn" @click="showForm = true">Create New Character</b-button>
+      </div>
+      <div class="d-flex justify-content-center flex-wrap">
+        <card-item v-for="(character, index) in characters" :character="character" :key="`card-character-${character.id}-${index}`" @editCharacter="showFormEditCharacter" />
+      </div>
     </div>
+    <form-character v-if="showForm" :show="showForm" :isEdit="isEdit" :characterInfo="selectedCharacter" @onEdit="onEdit" @onCreated="onCreated" @hide="showForm = false"></form-character>
   </b-overlay>
 </template>
 
@@ -13,12 +18,16 @@
 import ServicesCharacters from '../Services'
 import CardItem from '../components/Card'
 import SearchBar from '../components/SearchBar'
+import FormCharacter from '../components/FormCharacter'
+import PageHeader from '../components/PageHeader.vue'
 
 export default{
   name: 'MarvelList',
   components: {
     CardItem,
-    SearchBar
+    SearchBar,
+    FormCharacter,
+    PageHeader
   },
   data(){
     return {
@@ -29,7 +38,10 @@ export default{
       },
       nameStartsWith: null,
       totalCharacters: null,
-      show: false
+      showForm: false,
+      show:false,
+      selectedCharacter: {},
+      isEdit: false
     }
   },
   methods:{
@@ -37,7 +49,8 @@ export default{
       try{
         this.show = true
         const {data} = await ServicesCharacters.getCharacters(this.params)
-        this.characters = this.characters.concat(data.data.results)
+        const result = data.data.results.map((e) =>({...e, thumbnail: `${e.thumbnail.path}.${e.thumbnail.extension}`}))
+        this.characters = this.characters.concat(result)
         this.params.offset = data.data.offset +data.data.count
         this.totalCharacters = data.data.total
       }catch(err){
@@ -56,6 +69,11 @@ export default{
         }
       }
     },
+    showFormEditCharacter(character){
+      this.selectedCharacter = character
+      this.isEdit = true
+      this.showForm = true
+    },
     search(term){
       this.nameStartsWith = term
       this.params.offset = 0
@@ -67,6 +85,21 @@ export default{
         delete this.params['nameStartsWith']
       }
       this.loadCharacters()
+    },
+    onEdit(data){
+      this.showForm = false;
+      this.show = true;
+      const index = this.characters.findIndex((e) => e.id ===data.id);
+      this.characters[index] = data;
+      this.isEdit = false;
+      this.selectedCharacter = {}
+      this.show = false;
+    },
+    onCreated(data){
+      this.showForm = false;
+      this.show = true;
+      this.characters.unshift(data)
+      this.show = false;
     }
   },
   created(){

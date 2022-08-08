@@ -1,11 +1,11 @@
 <template>
-  <b-form-group :class="`col-12`">
+  <b-form-group class="col-md-12">
     <b-form @submit.prevent="search" inline>
-      <input type="text" :class="`form-control mb-3 col-12`" v-model="keyword"
-             :placeholder="placeholder" @blur="search">
+      <input type="text" class="search-bar__input" v-model="keyword"
+             placeholder="Search By Name" @blur="search">
       <b-button v-if="keyword && keyword.length > 0" variant="default" @click="onClear"
                 aria-label="searchBarClear"
-                :class="`common-close-button search-bar__close-button`">
+                class="common-close-button search-bar__close-button">X
       </b-button>
     </b-form>
   </b-form-group>
@@ -14,18 +14,6 @@
 <script>
 export default {
   name: "SearchBar",
-  props: {
-		classes: String,
-		formClasses: String,
-		placeholder: {
-			type: String,
-			default: "Search By Name"
-		},
-		defaultVal: {
-			type: String,
-			required: false,
-		},
-  },
 	data() {
 		return {
 			keyword: null,
@@ -46,13 +34,28 @@ export default {
 			this.keyword = null;
 			this.search();
 		},
-	},
-	created(){
-		this.keyword = this.defaultVal;
-		this.prevKeyword = this.defaultVal;
-	},
+	}
 }
 </script>
 
 <style scoped lang="stylus">
+@import "~@/core/styles/variables.styl"
+	.search-bar__input
+		border-radius 5px 
+		border 1px solid black
+		outline: none
+		width: 84%
+		padding: 0.5rem
+		margin-left: 5rem
+		:hover, :focus, :focus-visible
+			border 1px solid black
+			outline: none
+	.search-bar__close-button
+		margin-left -40px
+		margin-top -4px
+		font-weight: bold
+		color: color-red-1
+		cursor pointer
+		z-index 1
+
 </style>
