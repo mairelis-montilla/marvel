@@ -9,9 +9,9 @@
     img-width="250px"
     style="max-width: 18rem;"
     class="m-3">
-    <b-card-sub-title class="mb-2">Last modified: <span>{{character.modified}}</span></b-card-sub-title>
+    <b-card-sub-title class="mb-2">Last modified: <span v-date-format="character.modified"></span></b-card-sub-title>
     <b-card-text>
-      {{character.description}}
+      {{character.description ? character.description : `${character.name} don't have any description`  }}
     </b-card-text>
 
     <b-button href="#" variant="primary">Edit</b-button>
