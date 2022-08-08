@@ -3,7 +3,7 @@
 ## Setup del Proyecto
 Clonar repositorio
 ```
-git clone https://github.com/mairelis-montilla/marvel.git
+https://github.com/mairelis-montilla/sorting-carrier.git
 ```
 
 luego realizar el yarn install
