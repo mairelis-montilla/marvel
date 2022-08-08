@@ -10,7 +10,7 @@
         <card-item v-for="(character, index) in characters" :character="character" :key="`card-character-${character.id}-${index}`" @editCharacter="showFormEditCharacter" />
       </div>
     </div>
-    <form-character v-if="showForm" :show="showForm" :isEdit="isEdit" :characterInfo="selectedCharacter" @onEdit="onEdit" @onCreated="onCreated" @hide="showForm = false"></form-character>
+    <form-character v-if="showForm" :show="showForm" :isEdit="isEdit" :characterInfo="selectedCharacter" @onEdit="onEdit" @onCreated="onCreated" @hide="hideForm"></form-character>
   </b-overlay>
 </template>
 
@@ -73,6 +73,11 @@ export default{
       this.selectedCharacter = character
       this.isEdit = true
       this.showForm = true
+    },
+    hideForm(){
+      this.selectedCharacter = {}
+      this.isEdit = false
+      this.showForm = false
     },
     search(term){
       this.nameStartsWith = term

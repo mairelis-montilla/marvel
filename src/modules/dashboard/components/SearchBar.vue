@@ -17,7 +17,7 @@ export default {
 	data() {
 		return {
 			keyword: null,
-			prevKeyword: null,
+			prevKeyword: '',
 		}
 	},
 	methods: {
@@ -25,9 +25,9 @@ export default {
       if (event && event.relatedTarget && event.relatedTarget.className.includes('search-bar__close-button'))
 				return;
 
-			if (this.prevKeyword !== this.keyword) {
-				this.$emit("onSearch", this.keyword);
-				this.prevKeyword = this.keyword;
+			if (this.prevKeyword !== this.keyword.trim()) {
+				this.$emit("onSearch", this.keyword.trim());
+				this.prevKeyword = this.keyword.trim();
 			}
 		},
 		onClear() {
